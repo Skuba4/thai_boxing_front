@@ -1,0 +1,164 @@
+.ring-grids-section {
+  display: grid;
+  gap: 16px;
+}
+
+.ring-detail-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ring-detail-search {
+  max-width: 220px;
+  margin: 0;
+}
+
+.ring-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border: 1px solid #d9e0ec;
+  border-radius: 999px;
+  background: #f4f7fb;
+}
+
+.ring-view-toggle-button {
+  min-height: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: transparent;
+  color: #62708b;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.ring-view-toggle-button:hover {
+  background: transparent;
+  color: #2d8cf0;
+  opacity: 1;
+}
+
+.ring-view-toggle-button-active,
+.ring-view-toggle-button-active:hover {
+  background: #ffffff;
+  color: #1f2f48;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.ring-fights-table {
+  display: grid;
+  gap: 0;
+  border: 1px solid #eef1f6;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.ring-fights-row {
+  display: grid;
+  grid-template-columns: 40px repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 8px;
+  padding: 8px 14px;
+  border-top: 1px solid #eef1f6;
+  font-size: 0.84rem;
+  color: #1f2f48;
+}
+
+.ring-fights-row:first-child {
+  border-top: 0;
+}
+
+.ring-fights-row > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.ring-fights-row .boxer-rank {
+  min-width: 20px;
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  flex: 0 0 20px;
+  padding: 0;
+}
+
+.ring-fights-row .ring-fights-rank-letter {
+  width: auto;
+  height: auto;
+  min-width: 0;
+  flex: 0 0 auto;
+  padding: 0 6px 0 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.ring-fights-row-head {
+      position: relative;
+      z-index: 1;
+      background: #f8fafc;
+      color: #4b5563;
+      font-weight: 600;
+      box-shadow: 0 1px 0 #eef1f6;
+      font-size: 1rem !important;
+      line-height: 1.2;
+    }
+
+.ring-fights-red {
+  background: rgba(240, 78, 78, 0.14);
+  min-height: 100%;
+  width: 100%;
+  padding: 0 8px;
+  border-radius: 6px;
+}
+
+.ring-fights-blue {
+  background: rgba(45, 140, 240, 0.14);
+  min-height: 100%;
+  width: 100%;
+  padding: 0 8px;
+  border-radius: 6px;
+}
+
+.ring-fights-bye {
+  background: #eef1f6;
+  color: #62708b;
+  min-height: 100%;
+  width: 100%;
+  padding: 0 8px;
+  border-radius: 6px;
+}
+
+.ring-fights-winner {
+  background: #ffffff;
+  min-height: 100%;
+  width: 100%;
+  padding: 0 8px;
+  border-radius: 6px;
+}
+
+.ring-fights-winner-red {
+  background: rgba(240, 78, 78, 0.14);
+}
+
+.ring-fights-winner-blue {
+  background: rgba(45, 140, 240, 0.14);
+}
+
+.ring-fights-row-head .ring-fights-bye {
+  background: #d8dee8;
+}
+
+.ring-fights-row:not(.ring-fights-row-head):nth-child(odd) {
+  background: #fcfdff;
+}
+

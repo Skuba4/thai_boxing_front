@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL}
+    container_name: thai_boxing_front_web
+    ports:
+      - "${FRONT_PORT:-3000}:80"
+    restart: unless-stopped

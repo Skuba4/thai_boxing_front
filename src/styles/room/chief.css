@@ -1,0 +1,516 @@
+.chief-ring-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.chief-judges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.chief-judge-card {
+  min-height: 104px;
+  border: 1px solid #d9dee8;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 12px 16px;
+  display: grid;
+  gap: 10px;
+  color: #1f2f48;
+}
+
+.chief-judge-card > span {
+  color: #7b8494;
+  font-size: 0.82rem;
+}
+
+.chief-judge-card strong {
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.chief-judge-card-footer {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid #eef1f6;
+  padding-top: 10px;
+  font-size: 0.82rem;
+}
+
+.chief-judge-select {
+  min-height: 30px;
+  width: 100%;
+  border: 1px solid #d9dee8;
+  background: #ffffff;
+  color: #1f2f48;
+  padding: 4px 8px;
+  font-size: 0.82rem;
+}
+
+.chief-link-button {
+  min-height: 0;
+  border: 0;
+  background: transparent;
+  color: #2d8cf0;
+  padding: 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.chief-link-button:hover {
+  background: transparent;
+  color: #1f78df;
+}
+
+.chief-active-fight-card {
+  min-height: 180px;
+  border: 1px solid #d9dee8;
+  border-radius: 6px;
+  background: #ffffff;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
+  padding: 20px;
+  color: #1f2f48;
+  text-align: center;
+}
+
+.chief-active-fight-number {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #d7deea;
+  border-radius: 999px;
+  background: #f9fbff;
+  color: #5f6b7b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.94rem;
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.chief-active-fight-names {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 1.38rem;
+}
+
+.chief-active-fight-names span {
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.chief-active-fight-names strong {
+  min-width: 0;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1.38rem;
+  font-weight: 750;
+}
+
+.chief-active-fight-name-red {
+  color: #c73f3f;
+}
+
+.chief-active-fight-name-blue {
+  color: #1f72d8;
+}
+
+.chief-active-fight-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0;
+}
+
+.chief-active-fight-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.chief-active-fight-line-head {
+  gap: 16px;
+}
+
+.chief-round-timer-row {
+  margin-top: 0;
+}
+
+.chief-fight-bottom-actions {
+  margin-top: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.chief-fight-bottom-actions > .chief-fight-action-button {
+  align-self: center;
+}
+
+.chief-fight-winner-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  align-self: center;
+}
+
+.chief-fight-winner-dropdown {
+  position: relative;
+}
+
+.chief-fight-winner-select {
+  min-width: 220px;
+  min-height: 30px;
+  padding: 4px 8px;
+  border: 1px solid #d9dde5;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.chief-fight-winner-caret {
+  font-size: 0.72rem;
+  color: #6b7280;
+}
+
+.chief-fight-winner-menu {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  width: 100%;
+  border: 1px solid #d9dde5;
+  background: #ffffff;
+  z-index: 10;
+}
+
+.chief-fight-winner-menu-item {
+  width: 100%;
+  min-height: 30px;
+  padding: 4px 8px;
+  text-align: left;
+  background: #ffffff;
+}
+
+.chief-fight-winner-menu-item:hover {
+  background: #e5e7eb;
+}
+
+.chief-fight-winner-option-red {
+  color: #8f3131;
+  font-weight: 700;
+}
+
+.chief-fight-winner-option-reset {
+  color: #7b8493;
+}
+
+.chief-fight-winner-option-blue {
+  color: #2c5fc1;
+  font-weight: 700;
+}
+
+.chief-fight-winner-select-red {
+  color: #8f3131;
+  font-weight: 700;
+}
+
+.chief-fight-winner-select-reset {
+  color: #7b8493;
+}
+
+.chief-fight-winner-select-blue {
+  color: #2c5fc1;
+  font-weight: 700;
+}
+
+.chief-round-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 8px;
+}
+
+.chief-round-timer-display {
+  min-width: 58px;
+  min-height: 30px;
+  padding: 5px 8px;
+  border: 1px solid #d7deea;
+  border-radius: 4px;
+  background: #f8fafc;
+  color: #1f2f48;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  font-size: 1rem;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.chief-round-timer-select {
+  height: 30px;
+  min-width: 74px;
+  border: 1px solid #d7deea;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #1f2f48;
+  padding: 0 6px;
+  font-size: 0.82rem;
+}
+
+.chief-round-timer-button {
+  width: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  border: 1px solid #d7deea;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #4b5563;
+  padding: 0;
+  font-size: 0.74rem;
+  line-height: 1;
+}
+
+.chief-round-timer-button-start {
+  background: #eefbe8;
+  color: #3e6a1d;
+  border-color: #cfe5c1;
+}
+
+.chief-round-timer-button-start:hover {
+  background: #e1f4d8;
+  color: #325918;
+  box-shadow: 0 0 0 3px rgba(78, 139, 45, 0.14);
+}
+
+.chief-round-timer-button-stop {
+  background: #fdeeee;
+  color: #b94848;
+  border-color: #efc3c3;
+}
+
+.chief-round-timer-button-stop:hover {
+  background: #f9dede;
+  color: #a43a3a;
+  box-shadow: 0 0 0 3px rgba(198, 90, 90, 0.14);
+}
+
+.chief-fight-action-button {
+  min-width: 118px;
+  min-height: 30px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.84rem;
+}
+
+.chief-fight-action-button:hover {
+  box-shadow: 0 0 0 3px rgba(45, 140, 240, 0.14);
+}
+
+.chief-fight-action-button-start {
+  background: #eefbe8;
+  color: #3e6a1d;
+  border-color: #cfe5c1;
+}
+
+.chief-fight-action-button-start:hover {
+  background: #e1f4d8;
+  color: #325918;
+  box-shadow: 0 0 0 3px rgba(78, 139, 45, 0.16);
+}
+
+.chief-fight-action-button-finish {
+  background: #fdeeee;
+  color: #b94848;
+  border-color: #efc3c3;
+}
+
+.chief-fight-action-button-finish:hover {
+  background: #f9dede;
+  color: #a43a3a;
+  box-shadow: 0 0 0 3px rgba(198, 90, 90, 0.16);
+}
+
+.chief-fight-action-button-notes {
+  background: #eaf4ff;
+  color: #2d78c8;
+  border-color: #b7d7ff;
+}
+
+.chief-fight-action-button-notes:hover {
+  background: #dcecff;
+  color: #1f68b5;
+  box-shadow: 0 0 0 3px rgba(45, 140, 240, 0.16);
+}
+
+.chief-fights-row {
+  grid-template-columns: 28px 28px repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+  border-top: 0;
+  align-items: center;
+  line-height: 1.15;
+}
+
+.chief-fights-table {
+  max-height: 584px;
+  overflow-y: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.chief-fights-table .chief-fights-row-head {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  font-size: inherit !important;
+  line-height: 1.5;
+  border-bottom: 1px solid #eef1f6;
+  box-shadow: none;
+}
+
+.chief-fights-row-head {
+  align-items: center;
+  background: #f8fafc;
+  color: #4b5563;
+  font-weight: 600;
+  min-height: 40px;
+  padding: 0;
+}
+
+.chief-fights-row-button {
+  width: 100%;
+  min-height: 28px;
+  border: 0;
+  border-top: 0;
+  border-bottom: 1px solid #eef1f6;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.chief-fights-row-disabled {
+  position: relative;
+  opacity: 0.45;
+  cursor: default;
+}
+
+.ring-fights-red[title^="Победитель боя"],
+.ring-fights-blue[title^="Победитель боя"] {
+  background: #eef1f6;
+  color: #4b5563;
+}
+
+.chief-fights-row-disabled:hover {
+  background: transparent;
+}
+
+.chief-fights-row-disabled::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 50%;
+  height: 1px;
+  background: #6f7c8f;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.chief-fights-row .room-boxers-select-cell {
+  min-width: 28px;
+  padding: 0;
+  overflow: visible;
+}
+
+.chief-fights-row-button .ring-fights-red,
+.chief-fights-row-button .ring-fights-blue,
+.chief-fights-row-button .ring-fights-bye,
+.chief-fights-row-button .ring-fights-winner {
+  align-self: stretch;
+  min-height: 100%;
+  height: auto;
+  margin-block: 0;
+  padding: 0 16px;
+  border-radius: 0;
+}
+
+.chief-fights-row > span:first-child {
+  padding-left: 0;
+}
+
+.chief-fights-row > span:nth-child(3),
+.chief-fights-row > span:nth-child(4),
+.chief-fights-row > span:nth-child(5) {
+  margin-left: 16px;
+}
+
+.chief-fights-row-button > span:nth-child(3),
+.chief-fights-row-button > span:nth-child(4),
+.chief-fights-row-button > span:nth-child(5) {
+  margin-left: 0;
+}
+
+.chief-fights-table .chief-fights-row-button.room-boxers-row-selected,
+.chief-fights-table .chief-fights-row-button.room-boxers-row-selected:hover,
+.chief-fights-table .chief-fights-row-button.room-boxers-row-selected:nth-child(odd),
+.chief-fights-table .chief-fights-row-button.room-boxers-row-selected:nth-child(even) {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.chief-fights-select-marker {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 1px solid #c9d3e0;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.chief-fights-row-button:hover .chief-fights-select-marker {
+  border-color: #87b8ff;
+}
+
+.chief-fights-row-disabled:hover .chief-fights-select-marker {
+  border-color: #d9dde5;
+}
+
+.chief-fights-row-disabled.room-boxers-row-selected:hover .chief-fights-select-marker,
+.chief-fights-row-disabled.room-boxers-row-selected .chief-fights-select-marker {
+  border-color: #c7ced9;
+}
+
+.chief-fights-select-marker-active {
+  background: #d6dce5;
+  border-color: #c7ced9;
+  transform: scale(1.04);
+}
+
+.chief-fights-select-marker-disabled {
+  background: #f1f3f7;
+  border-color: #d9dde5;
+}

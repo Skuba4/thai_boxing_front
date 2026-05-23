@@ -1,0 +1,124 @@
+.fight-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) minmax(0, 1fr);
+  border: 1px solid #e4e7ee;
+  background: #ffffff;
+  min-height: 64px;
+  overflow: hidden;
+}
+
+.fight-card-readonly {
+  grid-template-columns: 92px minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.fight-card-side {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 2px;
+  padding: 8px 10px;
+  border-right: 1px solid #eef1f6;
+  background: #fbfcfe;
+}
+
+.fight-card-side strong {
+  font-size: 1rem;
+}
+
+.fight-card-side span {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.fight-card-corner {
+  display: grid;
+  align-content: center;
+  gap: 2px;
+  padding: 8px 12px;
+  min-width: 0;
+}
+
+.fight-card-corner strong,
+.fight-card-corner span {
+  overflow-wrap: anywhere;
+}
+
+.fight-card-corner strong {
+  font-size: 0.94rem;
+  line-height: 1.2;
+}
+
+.fight-card-corner span {
+  font-size: 0.84rem;
+  line-height: 1.15;
+}
+
+.fight-card-corner-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.fight-card-corner-red {
+  border-right: 1px solid #eef1f6;
+  background: #ffdede;
+}
+
+.fight-card-corner-red .fight-card-corner-title {
+  color: #c65a5a;
+}
+
+.fight-card-corner-blue {
+  background: #d8e6ff;
+}
+
+.fight-card-corner-blue .fight-card-corner-title {
+  color: #1f4fc9;
+}
+
+.fight-card-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.fight-card:hover .fight-card-actions,
+.fight-card:focus-within .fight-card-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fight-preview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fight-preview-corner {
+  border: 1px solid #e4e7ee;
+  border-radius: 8px;
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.fight-preview-corner span {
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.fight-preview-corner-red span {
+  color: #c65a5a;
+}
+
+.fight-preview-corner-blue span {
+  color: #4a79d8;
+}
+

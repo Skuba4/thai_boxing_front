@@ -1,0 +1,856 @@
+.modal-form {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.modal-form .field span {
+  margin-bottom: 2px;
+}
+
+.modal-form .field input,
+.modal-form .field select {
+  min-height: 34px;
+  padding: 7px 10px;
+}
+
+.room-form-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 54px;
+  align-items: end;
+}
+
+.room-create-form-edit .room-form-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.room-form-grid .field {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.room-form-grid input,
+.room-form-grid select {
+  min-height: 34px;
+  padding: 7px 10px;
+}
+
+.room-field-compact input {
+  text-align: center;
+}
+
+.new-room-tile {
+  width: 100%;
+  min-height: 96px;
+  border: 1px solid #8fc4ff;
+  background: #ffffff;
+  color: #2587ff;
+  font-size: 0.95rem;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.competition-section-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.competition-section-header {
+  position: relative;
+  width: 100%;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border: 1px solid #eef1f6;
+  color: inherit;
+  text-align: left;
+}
+
+.competition-section-chevron {
+  position: absolute;
+  right: 10px;
+  color: #94a3b8;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.competition-section-header:hover .competition-section-chevron {
+  color: #2d8cf0;
+}
+
+.competition-section-chevron-open {
+  transform: rotate(180deg);
+}
+
+.competition-section .rooms-grid {
+  margin-top: 10px;
+}
+
+.room-card {
+  border: 1px solid #e4e7ee;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: #ffffff;
+  color: #1f2937;
+  text-align: left;
+  overflow: hidden;
+}
+
+.room-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.room-card-actions-column {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  border-left: 1px solid #eef1f6;
+}
+
+.room-card:hover .room-card-actions-column,
+.room-card:focus-within .room-card-actions-column {
+  opacity: 1;
+}
+
+.room-card-action-button {
+  flex: 1;
+  min-height: 0;
+  border-radius: 0;
+  background: #fff8e8;
+  color: #9f7a1d;
+  font-size: 1rem;
+  line-height: 1;
+  border-bottom: 1px solid #eef1f6;
+  padding: 0;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.room-card-action-button:last-child {
+  border-bottom: 0;
+}
+
+.room-card-action-button-danger {
+  background: #fdeeee;
+  color: #c65a5a;
+}
+
+.room-card-action-button:hover {
+  background: #fdf0cc;
+  color: #8e6810;
+  transform: scale(1.04);
+}
+
+.room-card-action-button-danger:hover {
+  background: #f9dede;
+  color: #b94848;
+}
+
+.room-card-body {
+  padding: 10px 12px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.competition-card {
+  min-height: 0;
+}
+
+.competition-card .room-card-body {
+  min-height: 0;
+  grid-template-rows: auto 1px auto;
+  gap: 0;
+  padding: 0;
+  align-content: start;
+}
+
+.competition-card .room-card-header {
+  align-items: flex-start;
+  padding: 12px 18px 6px;
+}
+
+.competition-card .room-card-divider {
+  margin-inline: 0;
+}
+
+.competition-card-title-block {
+  min-width: 0;
+  display: grid;
+  gap: 0;
+}
+
+.competition-card-description-inline {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.84rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.competition-card .room-card-footer {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  padding: 6px 18px 10px;
+}
+
+.competition-card-pin {
+  flex: 0 0 28px;
+}
+
+.competition-card-pin svg {
+  width: 18px;
+  height: 18px;
+  transform: rotate(45deg);
+}
+
+.competition-card-pin:hover {
+  background: transparent;
+}
+
+.competition-card-pin-active {
+  color: #2d8cf0;
+}
+
+.room-card h3 {
+  font-size: 0.92rem;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.room-card-divider {
+  height: 1px;
+  background: #eef1f6;
+  margin-inline: -12px;
+}
+
+.room-card-description {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.82rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.ring-card-description-placeholder {
+  min-height: 28px;
+}
+
+.room-card-meta {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.78rem;
+}
+
+.room-card-footer {
+  display: grid;
+  gap: 2px;
+}
+
+.room-status {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.room-status-wait {
+  color: #c08a13;
+}
+
+.room-status-active {
+  color: #47a139;
+}
+
+.room-status-finished {
+  color: #c65a5a;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.36);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 20;
+}
+
+.modal-window {
+  width: min(100%, 560px);
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+}
+
+.modal-window-grid {
+  width: min(100%, 1180px);
+  padding: 20px;
+}
+
+.modal-window-fight-notes {
+  width: min(100%, 1280px);
+  max-height: calc(100vh - 40px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.fight-notes-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.fight-notes-modal-header h3 {
+  margin: 0;
+}
+
+.fight-notes-rounds {
+  display: grid;
+  gap: 18px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.fight-notes-round-section {
+  display: grid;
+  gap: 10px;
+}
+
+.fight-notes-round-section h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.fight-notes-round-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.chief-judges-grid-side {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fight-note-card {
+  display: grid;
+  gap: 8px;
+}
+
+.fight-note-card-label {
+  color: #6b7280;
+  font-size: 0.86rem;
+}
+
+.fight-note-card-body {
+  min-height: 280px;
+  border: 1px solid #d9dde5;
+  border-radius: 10px;
+  padding: 10px;
+  background: #ffffff;
+}
+
+.judge-note-sheet {
+  width: 100%;
+  border: 1px solid #cfd6e2;
+  background: #ffffff;
+  padding: 10px 12px;
+  display: grid;
+  gap: 16px;
+  color: #111827;
+}
+
+.judge-note-sheet h5 {
+  margin: 0;
+  text-align: center;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.judge-note-sheet-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  font-size: 0.68rem;
+  align-items: center;
+  text-align: center;
+}
+
+.judge-note-sheet-grid-name {
+  display: grid;
+}
+
+.judge-note-sheet-meta-secondary {
+  grid-template-columns: 120px minmax(0, 1fr);
+}
+
+.judge-note-sheet-fighters {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+
+.judge-note-sheet-corner,
+.judge-note-sheet-center {
+  display: grid;
+  gap: 4px;
+  font-size: 0.86rem;
+}
+
+.judge-note-sheet-corner strong,
+.judge-note-sheet-center strong {
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.judge-note-sheet-corner span {
+  min-height: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  text-align: center;
+}
+
+.judge-note-sheet-center {
+  text-align: center;
+  color: #64748b;
+  font-weight: 700;
+  align-self: center;
+}
+
+.judge-note-sheet-corner-red strong {
+  color: #dc2626;
+}
+
+.judge-note-sheet-corner-blue strong {
+  color: #2563eb;
+}
+
+.judge-note-sheet-corner-red span {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.judge-note-sheet-corner-blue span {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.judge-note-sheet-table {
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr 1.5fr;
+  border: 1px solid #111827;
+  font-size: 0.62rem;
+}
+
+.judge-note-sheet-head,
+.judge-note-sheet-cell {
+  min-height: 42px;
+  border-right: 1px solid #111827;
+  border-bottom: 1px solid #111827;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 4px;
+}
+
+.judge-note-sheet-head:nth-child(3),
+.judge-note-sheet-cell:nth-child(6) {
+  border-right: 0;
+}
+
+.judge-note-sheet-cell:nth-child(n + 4) {
+  min-height: 54px;
+  border-bottom: 0;
+}
+
+.judge-note-sheet-input {
+  width: 100%;
+  min-height: 38px;
+  border: 0;
+  background: transparent;
+  text-align: center;
+  font: inherit;
+  color: inherit;
+  outline: none;
+}
+
+.judge-note-sheet-round-cell {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.judge-note-sheet-result {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 0.68rem;
+}
+
+.side-judge-fight-card {
+  justify-items: center;
+  min-height: 260px;
+  width: 100%;
+}
+
+.side-judge-fight-category {
+  color: #64748b;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.side-judge-fight-rank {
+  margin-right: 8px;
+  font-size: 0.78rem;
+  vertical-align: middle;
+}
+
+.side-judge-note-wrap {
+  width: min(100%, 420px);
+  margin: 0 auto;
+}
+
+.side-judge-round-cards {
+  width: min(100%, 720px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.side-judge-round-card {
+  width: min(140px, 100%);
+  border: 1px solid #e7ebf2;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px 12px;
+  display: grid;
+  gap: 6px;
+  text-align: center;
+  color: #10213d;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.side-judge-round-card:hover {
+  border-color: #b8c7dd;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
+}
+
+.side-judge-round-card:disabled {
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.side-judge-round-card-submitted {
+  background: #f3f4f6;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+}
+
+.side-judge-round-card-submitted:hover {
+  border-color: #e5e7eb;
+  box-shadow: none;
+}
+
+.side-judge-round-card strong {
+  font-size: 0.92rem;
+}
+
+.side-judge-round-card span {
+  color: #6b7280;
+  font-size: 0.78rem;
+}
+
+.side-judge-fight-actions {
+  justify-content: center;
+}
+
+.modal-window-side-note {
+  width: min(100%, 486px);
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+}
+
+.modal-window-side-note .profile-actions {
+  justify-content: center;
+}
+
+.fight-note-placeholder {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #eef1f6;
+  background: #fafbfe;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.fight-note-placeholder-empty {
+  color: #9aa4b2;
+}
+
+.modal-window-application-boxers {
+  width: min(100%, 756px);
+  max-height: min(620px, calc(100vh - 40px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-window-application-boxers .modal-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.modal-window-application-boxers .profile-actions {
+  flex-shrink: 0;
+}
+
+.modal-form-compact .field span {
+  margin-bottom: 4px;
+}
+
+.modal-form-compact .field input,
+.modal-form-compact .field select {
+  min-height: 34px;
+  padding: 7px 10px;
+}
+
+.modal-window-small {
+  width: min(100%, 420px);
+}
+
+.modal-window-confirm {
+  width: min(100%, 760px);
+}
+
+.modal-window-room-settings {
+  width: min(100%, 760px);
+}
+
+.room-settings-modal {
+  display: grid;
+  gap: 0;
+}
+
+.room-settings-tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid #e7ebf2;
+  margin-bottom: 10px;
+}
+
+.room-settings-tab {
+  min-height: 0;
+  padding: 0 0 12px;
+  background: transparent;
+  color: #64748b;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.room-settings-tab-active {
+  color: #2d8cf0;
+  border-bottom-color: #2d8cf0;
+}
+
+.room-settings-modal-header h3,
+.room-settings-section-head h4 {
+  margin: 0;
+}
+
+.room-settings-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.room-settings-modal-header .modal-text {
+  margin-top: 6px;
+}
+
+.room-settings-section {
+  display: grid;
+  gap: 12px;
+}
+
+.room-settings-form {
+  display: grid;
+  gap: 6px;
+}
+
+.room-settings-form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.room-settings-form .field span {
+  margin-bottom: 2px;
+}
+
+.room-settings-form .field input,
+.room-settings-form .field select {
+  min-height: 34px;
+  padding: 7px 10px;
+}
+
+.room-settings-section-head {
+  display: grid;
+  gap: 4px;
+}
+
+.room-settings-section-head span {
+  color: #6b7280;
+  font-size: 0.86rem;
+}
+
+.room-settings-danger-zone {
+  border: 1px solid #efc3c3;
+  background: #fff5f5;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.room-settings-danger-zone h4 {
+  margin: 0;
+  color: #9f2f2f;
+  font-weight: 400;
+}
+
+.room-settings-danger-zone .modal-text {
+  margin: 0;
+}
+
+.room-settings-danger-zone .danger-button {
+  min-width: 94px;
+  min-height: 18px;
+  padding: 3px 8px;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.room-settings-rings-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.modal-window-centered {
+  text-align: center;
+}
+
+.modal-window-centered .profile-actions {
+    justify-content: center;
+  }
+
+.modal-window-centered .profile-actions > button {
+    min-width: 94px;
+    min-height: 18px;
+    padding: 3px 8px;
+    font-size: 0.86rem;
+  }
+
+.modal-window .profile-actions > button {
+    min-width: 94px;
+  min-height: 18px;
+  padding: 3px 8px;
+  font-size: 0.86rem;
+}
+
+.confirm-button-warn {
+  background: #fff8e8;
+  color: #8a6410;
+  border: 1px solid #f0ddab;
+}
+
+.confirm-button-warn:hover {
+  background: #ffefc7;
+  color: #7a560c;
+}
+
+.fight-winner-confirm-text {
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.fight-winner-confirm-name {
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.fight-winner-confirm-name-red {
+  color: #b94848;
+}
+
+.fight-winner-confirm-name-blue {
+  color: #2563eb;
+}
+
+.fight-winner-confirm-name-reset {
+  color: #6b7280;
+}
+
+.modal-window h3 {
+  margin: 0 0 18px;
+  font-size: 1.3rem;
+}
+
+.modal-text {
+  margin: 0;
+  color: #4b5563;
+}
+
+.modal-text-warning {
+  color: #c65a5a;
+}
+

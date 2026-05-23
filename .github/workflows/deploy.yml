@@ -1,0 +1,22 @@
+name: "deploy"
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no root@${{ secrets.HOST }} "
+            cd /projects/thai_boxing/thai_boxing_front/ &&
+            git pull &&
+            docker compose up -d --build
+          "

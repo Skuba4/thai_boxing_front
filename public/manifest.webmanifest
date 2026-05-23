@@ -1,0 +1,17 @@
+{
+  "name": "THAI BOXING",
+  "short_name": "THAI BOXING",
+  "description": "THAI BOXING frontend.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4efe6",
+  "theme_color": "#1f4b99",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ]
+}

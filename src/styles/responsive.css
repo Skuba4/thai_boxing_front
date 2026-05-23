@@ -1,0 +1,66 @@
+@media (max-width: 768px) {
+  .app-shell {
+    padding: 0 16px;
+  }
+
+  .auth-panel {
+    min-height: 360px;
+  }
+
+  .cabinet-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: 0;
+    border-bottom: 1px solid #e4e7ee;
+    gap: 16px;
+  }
+
+  .panel-header,
+  .profile-toolbar,
+  .field-grid,
+  .profile-actions {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .email-action-button {
+    width: 100%;
+  }
+
+  .premium-button {
+    min-width: 0;
+  }
+
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .new-room-tile {
+    width: 100%;
+  }
+
+  .boxers-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .boxers-search,
+  .boxers-row {
+    width: 100%;
+  }
+
+  .boxers-row {
+    grid-template-columns: 1fr;
+  }
+
+  .room-settings-tabs,
+  .room-settings-danger-zone,
+  .room-settings-form-grid {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
