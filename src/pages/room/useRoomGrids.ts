@@ -20,6 +20,14 @@ import { useRoomGridDrafts } from "./useRoomGridDrafts";
 
 type State = "idle" | "loading" | "success" | "error";
 
+function shouldDebugGridSync() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return window.localStorage.getItem("debug-grid-sync") === "1";
+}
+
 export function useRoomGrids({
   activeRing,
   builtGridFights,
@@ -27,6 +35,8 @@ export function useRoomGrids({
   defaultRingGridOrders,
   draftGridBoxers,
   draftGridBoxersRef,
+  justBuiltGridIdRef,
+  suppressDraftGridIdsRef,
   draftRingGridOrders,
   editingGridId,
   gridForm,
@@ -56,6 +66,7 @@ export function useRoomGrids({
   setEditingGridId,
   setGridForm,
   setGridState,
+  setGrids,
   setGridsState,
   setIsGridModalOpen,
   setMessage,
@@ -72,6 +83,8 @@ export function useRoomGrids({
   defaultRingGridOrders: RingGridOrderDrafts;
   draftGridBoxers: Record<string, DraftGridSlot[]>;
   draftGridBoxersRef: MutableRefObject<Record<string, DraftGridSlot[]>>;
+  justBuiltGridIdRef: MutableRefObject<string | null>;
+  suppressDraftGridIdsRef: MutableRefObject<Record<string, boolean>>;
   draftRingGridOrders: RingGridOrderDrafts;
   editingGridId: string | null;
   gridForm: CreateGridPayload;
@@ -101,6 +114,7 @@ export function useRoomGrids({
   setEditingGridId: Dispatch<SetStateAction<string | null>>;
   setGridForm: Dispatch<SetStateAction<CreateGridPayload>>;
   setGridState: Dispatch<SetStateAction<State>>;
+  setGrids: Dispatch<SetStateAction<Grid[]>>;
   setGridsState: Dispatch<SetStateAction<State>>;
   setIsGridModalOpen: Dispatch<SetStateAction<boolean>>;
   setMessage: Dispatch<SetStateAction<string>>;
@@ -256,16 +270,42 @@ export function useRoomGrids({
     try {
       setGridState("loading");
       const latestGridBoxers = draftGridBoxersRef.current[gridId] ?? gridBoxers;
+      if (shouldDebugGridSync()) {
+        console.log("[grid-build:request]", {
+          gridId,
+          boxerList: latestGridBoxers.map((gridBoxer) => gridBoxer?.uuid ?? null),
+        });
+      }
       await buildRoomGridStage(tokens.access, roomUuid, gridId, {
         boxer_list: latestGridBoxers.map((gridBoxer) => gridBoxer?.uuid ?? null),
       });
 
+      justBuiltGridIdRef.current = gridId;
+      draftGridBoxersRef.current = {};
       setDraftGridBoxers({});
       setDraggingGridBoxer(null);
       setDropTarget(null);
       await loadRoomBoxers(tokens.access, roomUuid);
       await loadRoomRings(tokens.access, roomUuid);
-      await loadPairsData(tokens.access, roomUuid);
+      const nextGrids = await loadPairsData(tokens.access, roomUuid);
+      setGrids((current) =>
+        current.map((grid) =>
+          grid.uuid === gridId
+            ? {
+                ...grid,
+                boxer_list: latestGridBoxers.map((gridBoxer) => gridBoxer?.uuid ?? null),
+              }
+            : grid,
+        ),
+      );
+      if (shouldDebugGridSync()) {
+        console.log("[grid-build:response]", {
+          gridId,
+          latestGridBoxerIds: latestGridBoxers.map((gridBoxer) => gridBoxer?.uuid ?? null),
+          serverGridBoxerList:
+            nextGrids.find((grid) => grid.uuid === gridId)?.boxer_list ?? null,
+        });
+      }
       setGridState("success");
       setMessage("Сетка построена.");
     } catch (error) {

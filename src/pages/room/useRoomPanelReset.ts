@@ -71,7 +71,7 @@ export function useRoomPanelReset({
   setApplicationsState: (value: "idle") => void;
   setBoxers: (value: RoomPanelCache["boxers"]) => void;
   setBoxersState: (value: RoomPanelCache["boxersState"] | "idle") => void;
-  setBuiltGridFights: (value: Record<string, never>) => void;
+  setBuiltGridFights: (value: RoomPanelCache["builtGridFights"]) => void;
   setDraftGridBoxers: (value: Record<string, never>) => void;
   setDraftRingGridOrders: (value: Record<string, never>) => void;
   setDraggingGridBoxer: (value: null) => void;
@@ -181,7 +181,7 @@ export function useRoomPanelReset({
     setDraftGridBoxers({});
     setDraftRingGridOrders({});
     setSavedRingGridOrders({});
-    setBuiltGridFights({});
+    setBuiltGridFights(cache?.builtGridFights ?? {});
     setDraggingGridBoxer(null);
     setDraggingRingGridId(null);
     setDropTarget(null);

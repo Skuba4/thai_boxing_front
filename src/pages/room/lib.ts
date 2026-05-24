@@ -2,6 +2,20 @@ import type { Fight, Grid, RoomBoxer } from "../../features/auth/authApi";
 
 export type DraftGridSlot = RoomBoxer | null;
 
+declare global {
+  interface Window {
+    __gridSyncDebug?: Record<string, unknown>;
+  }
+}
+
+function shouldDebugGridSync() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return window.localStorage.getItem("debug-grid-sync") === "1";
+}
+
 export function getBracketColumnSize(count: number) {
   if (count <= 0) {
     return 0;
@@ -35,9 +49,32 @@ export function getBracketStageLabel(size: number) {
 
 export function gridFightsByGrid(fights: Fight[]) {
   return fights.reduce<Record<string, Fight[]>>((acc, fight) => {
-    acc[fight.grid] = [...(acc[fight.grid] ?? []), fight];
+    const gridKey = getFightGridKey(fight.grid);
+
+    if (!gridKey) {
+      return acc;
+    }
+
+    acc[gridKey] = [...(acc[gridKey] ?? []), fight];
     return acc;
   }, {});
+}
+
+function getFightGridKey(grid: Fight["grid"] | { uuid?: string } | null | undefined) {
+  if (!grid) {
+    return "";
+  }
+
+  if (typeof grid !== "string") {
+    return grid.uuid ?? "";
+  }
+
+  if (!grid.includes("/")) {
+    return grid;
+  }
+
+  const parts = grid.split("/").filter(Boolean);
+  return parts[parts.length - 1] ?? "";
 }
 
 export const fightStageOrder: Record<string, number> = {
@@ -172,9 +209,23 @@ export function getSyncedGridSlots(
               return boxerUuid ? boxerById.get(boxerUuid) ?? null : null;
             }),
         );
-  const builtGridBoxerIds = getDraftBoxerList(builtGridBoxers);
   const shouldUseBuiltGridBoxers =
-    builtGridBoxers.length > 0 && areBoxerSetsEqual(builtGridBoxerIds, savedBoxerIds);
+    builtGridBoxers.length > 0 && areBoxerSetsEqual(getDraftBoxerList(builtGridBoxers), savedBoxerIds);
+  if (shouldDebugGridSync()) {
+    window.__gridSyncDebug = {
+      ...(window.__gridSyncDebug ?? {}),
+      sync: {
+      gridId: grid.uuid,
+      gridName: grid.name,
+      savedBoxerIds,
+      initialGridSlotIds: getDraftBoxerList(initialGridSlots),
+      builtGridBoxerIds: getDraftBoxerList(builtGridBoxers),
+      builtFightCount: builtFights.length,
+      shouldUseBuiltGridBoxers,
+      syncedGridSlotIds: getDraftBoxerList(shouldUseBuiltGridBoxers ? builtGridBoxers : initialGridSlots),
+      },
+    };
+  }
 
   return {
     savedBoxerIds,

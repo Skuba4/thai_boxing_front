@@ -31,26 +31,30 @@ export function ChiefJudgesGrid({
 
         return (
           <article key={activeJudge?.uuid ?? judgeIndex} className="chief-judge-card">
-            <span>Активный судья {judgeIndex + 1}</span>
-            <strong>{getJudgeName(activeJudge)}</strong>
-            <div className="chief-judge-card-footer">
+            <div className="chief-judge-card-main">
+              <span className="chief-judge-card-badge">{judgeIndex + 1}</span>
               <select
                 className="chief-judge-select"
-                defaultValue=""
+                value={activeJudge?.uuid ?? ""}
                 disabled={ringSideJudgesState === "loading" || updateState === "loading"}
                 onChange={(event) => {
+                  if (event.target.value === activeJudge?.uuid) {
+                    return;
+                  }
+
                   onJudgeSelect(event.target.value);
-                  event.target.value = "";
                 }}
               >
-                <option value="">Выбрать бокового</option>
+                <option value="">
+                  Пусто
+                </option>
+                {activeJudge ? (
+                  <option value={activeJudge.uuid} hidden>
+                    {getJudgeName(activeJudge)}
+                  </option>
+                ) : null}
                 {inactiveJudges.map((application) => (
                   <option key={application.uuid} value={application.uuid}>
-                    {getJudgeName(application)}
-                  </option>
-                ))}
-                {activeJudges.map((application) => (
-                  <option key={application.uuid} value={application.uuid} disabled>
                     {getJudgeName(application)}
                   </option>
                 ))}

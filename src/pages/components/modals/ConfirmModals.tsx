@@ -60,6 +60,7 @@ export function ConfirmDeleteApplicationModal({
   title = "Удалить заявку?",
   description = "Это удалит заявку без возможности восстановления.",
   descriptionClassName = "modal-text",
+  className = "",
   content,
   confirmLabel = "Да, удалить",
   confirmButtonClassName = "danger-button",
@@ -70,7 +71,7 @@ export function ConfirmDeleteApplicationModal({
 }: ConfirmDeleteApplicationModalProps) {
   return (
     <ConfirmShell
-      className={content ? "modal-window-confirm" : ""}
+      className={`${content ? "modal-window-confirm" : ""} ${className}`.trim()}
       submitState={submitState}
       onCancel={onCancel}
     >

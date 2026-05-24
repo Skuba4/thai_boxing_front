@@ -68,7 +68,12 @@ export function useHomeAuth() {
     }
   }
 
-  async function handleLogin(event: FormEvent<HTMLFormElement>, onLoggedIn: () => void) {
+  async function handleLogin(
+    event: FormEvent<HTMLFormElement>,
+    onLoggedIn: () => void,
+    onProfileLoaded?: (premiumStatus: PremiumStatus, accessToken: string) => Promise<void> | void,
+    onPremiumRevoked?: () => void,
+  ) {
     event.preventDefault();
     try {
       setLoginState("loading");
@@ -76,10 +81,12 @@ export function useHomeAuth() {
       const tokens = await login({ email, password });
       if (!tokens.access) throw new Error("Login response does not contain access token.");
       setAuthTokens(tokens);
-      setProfileState("idle");
       onLoggedIn();
+      const premiumStatus = await loadProfile(tokens.access, onPremiumRevoked);
+      if (premiumStatus !== null) {
+        await onProfileLoaded?.(premiumStatus, tokens.access);
+      }
       setLoginState("success");
-      setView("cabinet");
     } catch (error) {
       setLoginState("error");
       authFlash.setMessage(getErrorMessage(error));

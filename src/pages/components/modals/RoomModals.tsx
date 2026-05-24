@@ -189,6 +189,9 @@ export function RoomSettingsModal({
               <SubmitButton loading={updateRoomState === "loading"} disabled={!roomForm.name || !roomForm.start_date}>
                 Сохранить
               </SubmitButton>
+              <button type="button" className="outline-button" onClick={onClose}>
+                Закрыть
+              </button>
             </ModalActions>
           </form>
         ) : activeSettingsTab === "rings" ? (
@@ -203,7 +206,7 @@ export function RoomSettingsModal({
               onOpenRing={() => {}}
               onToggleRing={onToggleRing}
             />
-            <ModalActions>
+            <ModalActions centered>
               <button type="button" className="outline-button" onClick={onClose}>
                 Закрыть
               </button>
@@ -218,7 +221,7 @@ export function RoomSettingsModal({
                 submitState={submitState}
                 onToggleBoxer={onOwnerBoxerToggle}
               />
-            <ModalActions>
+            <ModalActions centered>
               <button type="button" className="danger-button" onClick={onOwnerBoxersClear}>
                 Очистить список
               </button>

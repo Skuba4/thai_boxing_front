@@ -6,6 +6,7 @@ import {
   type RoomApplication,
   type RoomApplicationStatus,
   type RoomBoxer,
+  type RoomJudge,
   updateRoomApplication,
 } from "../../features/auth/authApi";
 import { getAuthTokens } from "../../features/auth/authStorage";
@@ -23,6 +24,7 @@ type State = "idle" | "loading" | "success" | "error";
 
 export function useRoomApplications({
   onGuestRoomStatusSync,
+  onGuestJudgeSync,
   currentUserEmail,
   fetchRoomBoxers,
   guestApplicationState,
@@ -50,6 +52,7 @@ export function useRoomApplications({
   setUpdatingJudgeApplicationId,
 }: {
   onGuestRoomStatusSync: (status: RoomApplicationStatus | null) => void;
+  onGuestJudgeSync: (judge: RoomJudge | null) => void;
   currentUserEmail: string;
   fetchRoomBoxers: (accessToken: string, roomUuid: string) => Promise<RoomBoxer[]>;
   guestApplicationState: State;
@@ -113,6 +116,7 @@ export function useRoomApplications({
   } = useJudgeApplications({
     pendingJudgeApplicationAction,
     roomUuid,
+    onGuestJudgeSync,
     setGuestJudge,
     setGuestJudgeApplicationState,
     setJudgeApplications,

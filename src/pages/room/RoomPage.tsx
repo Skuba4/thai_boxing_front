@@ -82,7 +82,7 @@ export function RoomPanel({
   const [activeSettingsTab, setActiveSettingsTab] = useState<"room" | "rings" | "owner-boxers">("room");
   const {
     activeRing, applicationBoxers, applications, applicationsState, boxers, boxersState, builtGridFights,
-    deleteState, deletingBoxerId, draftGridBoxers, draftGridBoxersRef, draftRingGridOrders, draggingGridBoxer,
+    deleteState, deletingBoxerId, draftGridBoxers, draftGridBoxersRef, justBuiltGridIdRef, suppressDraftGridIdsRef, draftRingGridOrders, draggingGridBoxer,
     draggingRingGridId, dropTarget, editingBoxerForm, editingBoxerId, editingGridId, editingRing, fightNotes,
     fightNotesState, fightWinnerDropdownRef, gridForm, gridSearch, gridState, grids, gridsState,
     guestApplicationState, guestJudge, guestJudgeApplicationState, guestRoomApplicationStatus,
@@ -296,6 +296,7 @@ export function RoomPanel({
     activeRing,
     boxers,
     boxersState,
+    builtGridFights,
     changedDraftGrids,
     grids,
     gridsState,
@@ -312,6 +313,7 @@ export function RoomPanel({
     defaultRingGridOrders,
     draftGridBoxers,
     draftGridBoxersRef,
+    justBuiltGridIdRef,
     grids,
     rings,
     setDraftGridBoxers,
@@ -395,6 +397,7 @@ export function RoomPanel({
     draftGridBoxersRef,
     draggingGridBoxer,
     grids,
+    suppressDraftGridIdsRef,
     setDraftGridBoxers,
     setDraggingGridBoxer,
     setDropTarget,
@@ -421,11 +424,11 @@ export function RoomPanel({
     handleGuestApplication,
     handleLoadOwnerRoomBoxers,
     handleJudgeApplicationStatusChange,
-    handleOpenOwnerAddBoxers,
     handleSubmitRoomApplicationBoxers,
     handleToggleApplicationBoxer,
   } = useRoomApplications({
     onGuestRoomStatusSync: (status) => onRoomPatch(room.uuid, { my_trainer_application_status: status }),
+    onGuestJudgeSync: (judge) => onRoomPatch(room.uuid, { my_judge: judge }),
     currentUserEmail,
     fetchRoomBoxers,
     guestApplicationState,
@@ -473,6 +476,7 @@ export function RoomPanel({
     ownerTab,
     redRemark: sideJudgeRedRemark,
     roomUuid: room.uuid,
+    ringSideJudges,
     roundTimerSeconds,
     selectedChiefFightRow,
     selectedFightWinner,
@@ -616,6 +620,8 @@ export function RoomPanel({
     defaultRingGridOrders,
     draftGridBoxers,
     draftGridBoxersRef,
+    justBuiltGridIdRef,
+    suppressDraftGridIdsRef,
     draftRingGridOrders,
     editingGridId,
     gridForm,
@@ -645,6 +651,7 @@ export function RoomPanel({
     setEditingGridId,
     setGridForm,
     setGridState,
+    setGrids,
     setGridsState,
     setIsGridModalOpen,
     setMessage,
@@ -658,11 +665,12 @@ export function RoomPanel({
 
   const { renderGridCard, renderRingGridCard } = useGridRenderers({
     activeFightNumberById: activeRingFightNumberById,
-    activeRings,
-    boxerById,
-    builtGridFights,
-    draftGridBoxers,
-    draggingGridBoxer,
+      activeRings,
+      boxerById,
+      builtGridFights,
+      draftGridBoxers,
+      suppressDraftGridIdsRef,
+      draggingGridBoxer,
     draggingRingGridId,
     dropTarget,
     gridState,
@@ -772,7 +780,6 @@ export function RoomPanel({
         onJudgeRingSelect={(applicationUuid) => void handleRingSideJudgeSelect(applicationUuid)}
         onEditRing={(ringName) => void handleStartEditRing(ringName)}
         onOpenRing={(ringName) => void handleOpenRingDetails(ringName)}
-        onOwnerBoxersOpen={() => void handleOpenOwnerAddBoxers()}
         onPendingApplicationAction={setPendingApplicationAction}
         onRoundSelect={setSelectedSideJudgeRound}
         onSaveOrder={() => void handleSaveRingGridOrderDrafts()}

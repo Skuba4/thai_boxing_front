@@ -69,7 +69,6 @@ export type RoomWorkspaceProps = {
   onJudgeDeleteRequest: () => void;
   onJudgeRingSelect: (applicationUuid: string) => void;
   onOpenRing: (ringName: string) => void;
-  onOwnerBoxersOpen: () => void;
   onPendingApplicationAction: Dispatch<SetStateAction<PendingApplicationAction | null>>;
   onRoundSelect: Dispatch<SetStateAction<NoteRound | null>>;
   onSaveOrder: () => void;

@@ -90,7 +90,6 @@ export function RoomWorkspace(props: RoomWorkspaceProps) {
         onJudgeChange={props.onJudgeChange}
         onJudgeDelete={props.onJudgeDelete}
         onJudgeRingSelect={props.onJudgeRingSelect}
-        onOwnerBoxersOpen={props.onOwnerBoxersOpen}
         onPendingApplicationAction={props.onPendingApplicationAction}
         onRingDetailSearchChange={props.onRingDetailSearchChange}
         onRoundSelect={props.onRoundSelect}

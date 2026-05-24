@@ -57,6 +57,8 @@ export function useRoomPanelState({
   });
 
   const draftGridBoxersRef = useRef<Record<string, import("./lib").DraftGridSlot[]>>({});
+  const justBuiltGridIdRef = useRef<string | null>(null);
+  const suppressDraftGridIdsRef = useRef<Record<string, boolean>>({});
   const fightWinnerDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const [boxers, setBoxers] = useState<RoomBoxer[]>(cachedState?.boxers ?? []);
@@ -143,6 +145,8 @@ export function useRoomPanelState({
     deletingBoxerId,
     draftGridBoxers,
     draftGridBoxersRef,
+    justBuiltGridIdRef,
+    suppressDraftGridIdsRef,
     draftRingGridOrders,
     draggingGridBoxer,
     draggingRingGridId,

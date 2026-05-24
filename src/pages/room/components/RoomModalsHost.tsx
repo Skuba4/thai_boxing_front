@@ -250,12 +250,25 @@ export function RoomModalsHost(props: Props) {
       {props.pendingFightWinnerConfirm && props.selectedChiefFightRow ? (
         <ConfirmDeleteApplicationModal
           title=""
-          description={`Выбрать победителем ${
-            props.selectedFightWinner === props.redWinnerUuid
-              ? `<span class="fight-winner-confirm-name fight-winner-confirm-name-red">${props.selectedChiefFightRow.redText}</span>`
-              : `<span class="fight-winner-confirm-name fight-winner-confirm-name-blue">${props.selectedChiefFightRow.blueText}</span>`
-          }?`}
-          descriptionClassName="modal-text fight-winner-confirm-text"
+          description=""
+          className="modal-window-fight-winner"
+          content={
+            <p className="modal-text fight-winner-confirm-text">
+              <span className="fight-winner-confirm-line">Выбрать победителем</span>
+              <span
+                className={
+                  props.selectedFightWinner === props.redWinnerUuid
+                    ? "fight-winner-confirm-name fight-winner-confirm-name-red"
+                    : "fight-winner-confirm-name fight-winner-confirm-name-blue"
+                }
+              >
+                {props.selectedFightWinner === props.redWinnerUuid
+                  ? props.selectedChiefFightRow.redText
+                  : props.selectedChiefFightRow.blueText}
+                ?
+              </span>
+            </p>
+          }
           confirmLabel="Сохранить"
           confirmButtonClassName="sync-button"
           submitState={props.updateState}

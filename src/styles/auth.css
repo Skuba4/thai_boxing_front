@@ -48,6 +48,102 @@
   width: min(100%, 368px);
 }
 
+.auth-policy-consent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2px;
+  color: #111827;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  cursor: pointer;
+  text-align: center;
+}
+
+.auth-policy-consent input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.auth-policy-checkmark {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #8aa9c7;
+  border-radius: 999px;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.auth-policy-checkmark::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #1890ff;
+  transform: scale(0);
+  transition: transform 0.15s ease;
+}
+
+.auth-policy-consent input:checked + .auth-policy-checkmark::after {
+  transform: scale(1);
+}
+
+.auth-policy-link {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #1890ff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.auth-policy-link:hover {
+  opacity: 1;
+  color: #0f7ad8;
+}
+
+.auth-policy-modal h3 {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.auth-policy-modal {
+  width: min(100%, 520px);
+}
+
+.auth-policy-modal-content {
+  display: grid;
+  gap: 12px;
+}
+
+.auth-policy-modal-section {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid #e5ebf3;
+  border-radius: 12px;
+  background: #fbfdff;
+}
+
+.auth-policy-modal-section h4 {
+  margin: 0;
+  color: #1f2f48;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.auth-policy-modal-section .modal-text {
+  text-align: left;
+  line-height: 1.45;
+}
+
 .field {
   display: grid;
   margin-bottom: 12px;

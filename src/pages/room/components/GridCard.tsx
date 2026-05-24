@@ -26,6 +26,7 @@ type GridCardProps = {
   boxerById: Map<string, RoomBoxer>;
   builtGridFights: Record<string, Fight[]>;
   draftGridBoxers: Record<string, DraftGridSlot[]>;
+  suppressDraft: boolean;
   draggingGridBoxer: DraggingGridBoxer;
   dropTarget: DropTarget;
   grid: Grid;
@@ -45,11 +46,20 @@ type GridCardProps = {
   onDropTargetChange: (target: DropTarget) => void;
 };
 
+function shouldDebugGridSync() {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return window.localStorage.getItem("debug-grid-sync") === "1";
+}
+
 export function GridCard({
   activeRings,
   boxerById,
   builtGridFights,
   draftGridBoxers,
+  suppressDraft,
   draggingGridBoxer,
   dropTarget,
   grid,
@@ -84,7 +94,7 @@ export function GridCard({
     ? shouldUseBuiltGridBoxers
       ? builtGridBoxers
       : fallbackGridBoxers
-    : draftGridBoxers[grid.uuid] ?? syncedGridSlots;
+    : suppressDraft ? syncedGridSlots : (draftGridBoxers[grid.uuid] ?? syncedGridSlots);
   const gridPairs = getGridPairs(gridBoxers);
   const canBuildGrid = !hasDoubleByePair(gridBoxers);
   const stageLabel = getGridStageLabel(gridBoxers);
@@ -93,6 +103,19 @@ export function GridCard({
   const finalFight = getFinalFight(builtFights);
   const currentRingName = getGridRingName(grid);
   const winnerText = getWinnerText(finalFight, boxerById, displayFightNumberById);
+  if (shouldDebugGridSync() && room.is_owner && !readOnly) {
+    console.log("[grid-render]", {
+      gridId: grid.uuid,
+      gridName: grid.name,
+      gridBoxerIds: gridBoxers.map((gridBoxer) => gridBoxer?.uuid ?? null),
+      draftGridBoxerIds: (draftGridBoxers[grid.uuid] ?? []).map((gridBoxer) => gridBoxer?.uuid ?? null),
+      syncedGridSlotIds: syncedGridSlots.map((gridBoxer) => gridBoxer?.uuid ?? null),
+      builtGridBoxerIds: builtGridBoxers.map((gridBoxer) => gridBoxer?.uuid ?? null),
+      rawBoxerList: grid.boxer_list,
+      builtFightCount: builtFights.length,
+      shouldUseBuiltGridBoxers,
+    });
+  }
 
   return (
     <article className="ring-grid-card">

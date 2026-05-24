@@ -10,32 +10,39 @@
 }
 
 .chief-judge-card {
-  min-height: 104px;
+  min-height: 52px;
   border: 1px solid #d9dee8;
   border-radius: 6px;
   background: #ffffff;
-  padding: 12px 16px;
-  display: grid;
-  gap: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
   color: #1f2f48;
 }
 
-.chief-judge-card > span {
-  color: #7b8494;
-  font-size: 0.82rem;
+.chief-judge-card-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  width: 100%;
 }
 
-.chief-judge-card strong {
-  font-size: 0.92rem;
-  font-weight: 650;
-}
-
-.chief-judge-card-footer {
-  display: grid;
-  gap: 8px;
-  border-top: 1px solid #eef1f6;
-  padding-top: 10px;
-  font-size: 0.82rem;
+.chief-judge-card-badge {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #d7deea;
+  border-radius: 999px;
+  background: #f9fbff;
+  color: #5f6b7b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  line-height: 1;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .chief-judge-select {

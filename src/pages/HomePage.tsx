@@ -6,7 +6,7 @@ import { BoxerModal } from "./components/modals/BoxerModals";
 import { ConfirmDeleteRoomModal, UnsavedChangesModal } from "./components/modals/ConfirmModals";
 import { CreateRoomModal } from "./components/modals/RoomModals";
 import { capitalizeFirstLetter, filterBoxers, getEmptyBoxerForm, normalizeWeightInput } from "./homeBoxers";
-import { PREMIUM_ACTIVE, type CabinetTab } from "./homeSharedTypes";
+import { PREMIUM_ACTIVE, type CabinetTab, type PremiumStatus } from "./homeSharedTypes";
 import { getDefaultRoomTab } from "./room/constants";
 import { useAutoClearMessage } from "./alerts";
 import { useHomeAuth } from "./useHomeAuth";
@@ -141,8 +141,15 @@ export function HomePage() {
   useEffect(() => {
     if (auth.view !== "cabinet" || rooms.roomsState !== "idle") return;
     const tokens = getAuthTokens();
-    void rooms.loadRooms(tokens?.access, Boolean(tokens?.access), nav.activeRoomUuid, nav.openRoomUuids, nav.setOpenRoomUuids, nav.setActiveRoomUuid);
-  }, [auth.view, nav.activeRoomUuid, nav.openRoomUuids, nav.setActiveRoomUuid, nav.setOpenRoomUuids, rooms, rooms.roomsState]);
+    void rooms.loadRooms(
+      tokens?.access,
+      Boolean(tokens?.access) && hasPremiumAccess,
+      nav.activeRoomUuid,
+      nav.openRoomUuids,
+      nav.setOpenRoomUuids,
+      nav.setActiveRoomUuid,
+    );
+  }, [auth.view, hasPremiumAccess, nav.activeRoomUuid, nav.openRoomUuids, nav.setActiveRoomUuid, nav.setOpenRoomUuids, rooms, rooms.roomsState]);
 
   useEffect(() => {
     if (auth.view !== "cabinet" || nav.activeTab !== "athletes" || !hasPremiumAccess || boxers.boxersState !== "idle") return;
@@ -213,6 +220,17 @@ export function HomePage() {
         ? normalizeWeightInput(value)
         : value;
     boxers.setEditingBoxerForm((current) => ({ ...current, [field]: nextValue }));
+  }
+
+  async function handleRoomsBootstrapAfterProfile(premiumStatus: PremiumStatus, accessToken: string) {
+    await rooms.loadRooms(
+      accessToken,
+      premiumStatus === PREMIUM_ACTIVE,
+      nav.activeRoomUuid,
+      nav.openRoomUuids,
+      nav.setOpenRoomUuids,
+      nav.setActiveRoomUuid,
+    );
   }
 
   function handleRoomPinToggle(roomUuid: string) {
@@ -451,10 +469,17 @@ export function HomePage() {
             password={auth.password}
             onEmailChange={auth.setEmail}
             onPasswordChange={auth.setPassword}
-            onSubmit={(event) => void auth.handleLogin(event, () => {
-              rooms.setRoomsState("idle");
-              boxers.setBoxersState?.("idle");
-            })}
+            onSubmit={(event) => void auth.handleLogin(
+              event,
+              () => {
+                boxers.setBoxersState?.("idle");
+              },
+              handleRoomsBootstrapAfterProfile,
+              () => {
+                boxers.setAthletesMessage("");
+                boxers.resetBoxersState();
+              },
+            )}
             onBack={() => {
               auth.setProfileMessage("");
               auth.setView("choice");

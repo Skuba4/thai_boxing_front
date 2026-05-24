@@ -31,6 +31,7 @@ export function useRoomFights({
   ownerTab,
   redRemark,
   roomUuid,
+  ringSideJudges,
   roundTimerSeconds,
   selectedChiefFightRow,
   selectedFightWinner,
@@ -65,6 +66,7 @@ export function useRoomFights({
   ownerTab: string;
   redRemark: string;
   roomUuid: string;
+  ringSideJudges: JudgeApplication[];
   roundTimerSeconds: number;
   selectedChiefFightRow: FightRow | null;
   selectedFightWinner: string | null;
@@ -219,15 +221,23 @@ export function useRoomFights({
   }
 
   async function handleRingSideJudgeSelect(applicationUuid: string) {
-    if (!activeRingName || !applicationUuid) return;
+    if (!activeRingName) return;
     const tokens = getAuthTokens();
     if (!tokens?.access) return setMessage("Сессия истекла.");
 
     try {
       setUpdateState("loading");
-      await updateRingSideJudgeActive(tokens.access, roomUuid, activeRingName, applicationUuid, true);
+      if (applicationUuid) {
+        await updateRingSideJudgeActive(tokens.access, roomUuid, activeRingName, applicationUuid, true);
+        setMessage("Судья активирован.");
+      } else {
+        const activeJudge = ringSideJudges.find((judge) => judge.is_active);
+        if (activeJudge) {
+          await updateRingSideJudgeActive(tokens.access, roomUuid, activeRingName, activeJudge.uuid, false);
+          setMessage("Судья деактивирован.");
+        }
+      }
       setRingSideJudges(await getRingSideJudges(tokens.access, roomUuid, activeRingName));
-      setMessage("Судья активирован.");
     } catch (error) {
       setMessage(getErrorMessage(error));
     } finally {

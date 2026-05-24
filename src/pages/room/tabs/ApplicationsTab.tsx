@@ -19,7 +19,6 @@ type ApplicationsTabProps = {
     payload: Partial<Pick<JudgeApplication, "status" | "ring" | "role" | "is_active">>,
   ) => void;
   onJudgeDelete: (applicationUuid: string) => void;
-  onOwnerBoxersOpen: () => void;
   onPendingApplicationAction: (action: PendingApplicationAction) => void;
 };
 
@@ -34,7 +33,6 @@ export function ApplicationsTab({
   updatingJudgeApplicationId,
   onJudgeChange,
   onJudgeDelete,
-  onOwnerBoxersOpen,
   onPendingApplicationAction,
 }: ApplicationsTabProps) {
   const [activeSection, setActiveSection] = useState<"trainers" | "judges">("trainers");
@@ -78,7 +76,6 @@ export function ApplicationsTab({
           roomApplications={roomApplications}
           updateState={updateState}
           updatingApplicationId={updatingApplicationId}
-          onOwnerBoxersOpen={onOwnerBoxersOpen}
           onPendingApplicationAction={onPendingApplicationAction}
         />
       ) : (

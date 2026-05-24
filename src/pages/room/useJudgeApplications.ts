@@ -5,6 +5,7 @@ import {
   deleteOwnJudgeApplication,
   type JudgeApplication,
   type RoomApplicationStatus,
+  type RoomJudge,
   updateJudgeApplication,
 } from "../../features/auth/authApi";
 import { getAuthTokens } from "../../features/auth/authStorage";
@@ -17,6 +18,7 @@ type State = "idle" | "loading" | "success" | "error";
 export function useJudgeApplications({
   pendingJudgeApplicationAction,
   roomUuid,
+  onGuestJudgeSync,
   setGuestJudge,
   setGuestJudgeApplicationState,
   setJudgeApplications,
@@ -27,6 +29,7 @@ export function useJudgeApplications({
 }: {
   pendingJudgeApplicationAction: PendingJudgeApplicationAction | null;
   roomUuid: string;
+  onGuestJudgeSync: (judge: RoomJudge | null) => void;
   setGuestJudge: Dispatch<SetStateAction<Pick<JudgeApplication, "status" | "role" | "ring" | "is_active"> | null>>;
   setGuestJudgeApplicationState: Dispatch<SetStateAction<State>>;
   setJudgeApplications: Dispatch<SetStateAction<JudgeApplication[]>>;
@@ -45,11 +48,14 @@ export function useJudgeApplications({
 
       if (pendingJudgeApplicationAction === "create") {
         const response = await createJudgeApplication(tokens.access, roomUuid);
-        setGuestJudge({ status: "0", role: "side", ring: "", is_active: false });
+        const nextJudge = { status: "0", role: "side", ring: "", is_active: false } satisfies RoomJudge;
+        setGuestJudge(nextJudge);
+        onGuestJudgeSync(nextJudge);
         setMessage(response.detail ?? "Заявка на судейство отправлена.");
       } else {
         await deleteOwnJudgeApplication(tokens.access, roomUuid);
         setGuestJudge(null);
+        onGuestJudgeSync(null);
         setMessage("Заявка на судейство удалена.");
       }
 

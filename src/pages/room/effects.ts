@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import type { Dispatch, RefObject, SetStateAction } from "react";
+import type { Dispatch, MutableRefObject, RefObject, SetStateAction } from "react";
 import type { Fight, Grid, Note, Ring, RoomBoxer } from "../../features/auth/authApi";
 import { getAuthTokens } from "../../features/auth/authStorage";
 import type { RoomPanelCache } from "../homePanelTypes";
@@ -62,6 +62,7 @@ export function useRoomCache({
   activeRing,
   boxers,
   boxersState,
+  builtGridFights,
   changedDraftGrids,
   grids,
   gridsState,
@@ -74,6 +75,7 @@ export function useRoomCache({
   activeRing: Ring | null;
   boxers: RoomBoxer[];
   boxersState: State;
+  builtGridFights: Record<string, Fight[]>;
   changedDraftGrids: Map<string, string[]>;
   grids: Grid[];
   gridsState: State;
@@ -90,6 +92,7 @@ export function useRoomCache({
       activeRing: isDocumentHidden ? null : activeRing,
       boxers: isDocumentHidden ? [] : boxers,
       boxersState: isDocumentHidden ? "idle" : boxersState,
+      builtGridFights: isDocumentHidden ? {} : builtGridFights,
       draftMovesByTargetGrid: Object.fromEntries(changedDraftGrids),
       grids: isDocumentHidden ? [] : grids,
       gridsState: isDocumentHidden ? "idle" : gridsState,
@@ -101,6 +104,7 @@ export function useRoomCache({
     activeRing,
     boxers,
     boxersState,
+    builtGridFights,
     changedDraftGrids,
     grids,
     gridsState,
@@ -119,6 +123,7 @@ export function useDraftSync({
   defaultRingGridOrders,
   draftGridBoxers,
   draftGridBoxersRef,
+  justBuiltGridIdRef,
   grids,
   rings,
   setDraftGridBoxers,
@@ -131,6 +136,7 @@ export function useDraftSync({
   defaultRingGridOrders: RingGridOrderDrafts;
   draftGridBoxers: Record<string, DraftGridSlot[]>;
   draftGridBoxersRef: RefObject<Record<string, DraftGridSlot[]>>;
+  justBuiltGridIdRef: MutableRefObject<string | null>;
   grids: Grid[];
   rings: Ring[];
   setDraftGridBoxers: Dispatch<SetStateAction<Record<string, DraftGridSlot[]>>>;
@@ -163,6 +169,8 @@ export function useDraftSync({
   }, [defaultRingGridOrders, rings, setDraftRingGridOrders, setSavedRingGridOrders]);
 
   useEffect(() => {
+    const justBuiltGridId = justBuiltGridIdRef.current;
+
     setDraftGridBoxers((current) => {
       const nextState: Record<string, DraftGridSlot[]> = {};
       let hasChanges = false;
@@ -170,6 +178,7 @@ export function useDraftSync({
       for (const grid of grids) {
         const currentGridBoxers = current[grid.uuid];
         const { savedBoxerIds, syncedGridSlots } = getSyncedGridSlots(grid, boxerById, builtGridFights);
+        const shouldResetJustBuiltGrid = justBuiltGridId === grid.uuid;
 
         if (savedBoxerIds.length > 0 && boxerById.size === 0) {
           if (currentGridBoxers) {
@@ -178,7 +187,9 @@ export function useDraftSync({
           continue;
         }
 
-        const nextGridBoxers = changedDraftGrids.has(grid.uuid)
+        const nextGridBoxers = shouldResetJustBuiltGrid
+          ? syncedGridSlots
+          : changedDraftGrids.has(grid.uuid)
           ? (currentGridBoxers ?? syncedGridSlots)
           : syncedGridSlots;
 
@@ -207,7 +218,10 @@ export function useDraftSync({
 
       return nextState;
     });
-  }, [boxerById, builtGridFights, changedDraftGrids, grids, setDraftGridBoxers]);
+    if (justBuiltGridId) {
+      justBuiltGridIdRef.current = null;
+    }
+  }, [boxerById, builtGridFights, changedDraftGrids, grids, justBuiltGridIdRef, setDraftGridBoxers]);
 }
 
 export function useTabStorage(ownerTab: OwnerTab, roomUuid: string) {

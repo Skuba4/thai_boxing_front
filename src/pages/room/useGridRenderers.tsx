@@ -1,4 +1,4 @@
-import type { Dispatch, DragEvent, SetStateAction } from "react";
+import type { Dispatch, MutableRefObject, DragEvent, SetStateAction } from "react";
 import type { Fight, Grid, Ring, Room, RoomBoxer } from "../../features/auth/authApi";
 import type { DraftGridSlot } from "./lib";
 import type { DraggingGridBoxer, DropTarget, PendingDraftAction } from "./types";
@@ -13,6 +13,7 @@ export function useGridRenderers({
   boxerById,
   builtGridFights,
   draftGridBoxers,
+  suppressDraftGridIdsRef,
   draggingGridBoxer,
   draggingRingGridId,
   dropTarget,
@@ -38,6 +39,7 @@ export function useGridRenderers({
   boxerById: Map<string, RoomBoxer>;
   builtGridFights: Record<string, Fight[]>;
   draftGridBoxers: Record<string, DraftGridSlot[]>;
+  suppressDraftGridIdsRef: MutableRefObject<Record<string, boolean>>;
   draggingGridBoxer: DraggingGridBoxer;
   draggingRingGridId: string | null;
   dropTarget: DropTarget;
@@ -66,6 +68,7 @@ export function useGridRenderers({
         boxerById={boxerById}
         builtGridFights={builtGridFights}
         draftGridBoxers={draftGridBoxers}
+        suppressDraft={Boolean(suppressDraftGridIdsRef.current[grid.uuid])}
         draggingGridBoxer={draggingGridBoxer}
         dropTarget={dropTarget}
         grid={grid}

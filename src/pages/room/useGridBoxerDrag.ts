@@ -14,6 +14,7 @@ export function useGridBoxerDrag({
   draftGridBoxersRef,
   draggingGridBoxer,
   grids,
+  suppressDraftGridIdsRef,
   setDraftGridBoxers,
   setDraggingGridBoxer,
   setDropTarget,
@@ -23,6 +24,7 @@ export function useGridBoxerDrag({
   draftGridBoxersRef: MutableRefObject<Record<string, DraftGridSlot[]>>;
   draggingGridBoxer: DraggingGridBoxer;
   grids: Grid[];
+  suppressDraftGridIdsRef: MutableRefObject<Record<string, boolean>>;
   setDraftGridBoxers: Dispatch<SetStateAction<Record<string, DraftGridSlot[]>>>;
   setDraggingGridBoxer: Dispatch<SetStateAction<DraggingGridBoxer>>;
   setDropTarget: Dispatch<SetStateAction<DropTarget>>;
@@ -34,6 +36,8 @@ export function useGridBoxerDrag({
     targetSlotIndex: number | null,
   ) {
     const current = draftGridBoxersRef.current;
+    delete suppressDraftGridIdsRef.current[sourceGridId];
+    delete suppressDraftGridIdsRef.current[targetGridId];
     const sourceGrid = grids.find((grid) => grid.uuid === sourceGridId);
     const targetGrid = grids.find((grid) => grid.uuid === targetGridId);
     const sourceGridBoxers = normalizeGridSlots(

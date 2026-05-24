@@ -46,7 +46,6 @@ type Props = {
   onJudgeChange: (applicationUuid: string, payload: Partial<Pick<JudgeApplication, "status" | "ring" | "role" | "is_active">>) => void;
   onJudgeDelete: (applicationUuid: string) => void;
   onJudgeRingSelect: (applicationUuid: string) => void;
-  onOwnerBoxersOpen: () => void;
   onPendingApplicationAction: Dispatch<SetStateAction<PendingApplicationAction | null>>;
   onRingDetailSearchChange: Dispatch<SetStateAction<string>>;
   onRoundSelect: Dispatch<SetStateAction<NoteRound | null>>;
@@ -124,7 +123,6 @@ export function RoomWorkspaceContentBlock({
   onJudgeChange,
   onJudgeDelete,
   onJudgeRingSelect,
-  onOwnerBoxersOpen,
   onPendingApplicationAction,
   onRingDetailSearchChange,
   onRoundSelect,
@@ -178,7 +176,6 @@ export function RoomWorkspaceContentBlock({
           updatingJudgeApplicationId={updatingJudgeApplicationId}
           onJudgeChange={onJudgeChange}
           onJudgeDelete={onJudgeDelete}
-          onOwnerBoxersOpen={onOwnerBoxersOpen}
           onPendingApplicationAction={onPendingApplicationAction}
         />
       ) : null}

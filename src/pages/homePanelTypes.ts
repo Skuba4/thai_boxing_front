@@ -2,6 +2,7 @@ import type React from "react";
 import type {
   Boxer,
   BoxerPayload,
+  Fight,
   Grid,
   Note,
   Ring,
@@ -20,6 +21,7 @@ export type RoomPanelCache = {
   ringsState: RequestState;
   grids: Grid[];
   gridsState: RequestState;
+  builtGridFights: Record<string, Fight[]>;
   activeRing: Ring | null;
   hasUnsavedDraftMoves: boolean;
   draftMovesByTargetGrid: Record<string, string[]>;
@@ -137,7 +139,7 @@ export type RoomSettingsModalProps = {
 };
 
 export type ConfirmDeleteRoomModalProps = { roomName: string; submitState: RequestState; onCancel: () => void; onConfirm: () => void };
-export type ConfirmDeleteApplicationModalProps = { title?: string; description?: string; descriptionClassName?: string; content?: React.ReactNode; confirmLabel?: string; confirmButtonClassName?: string; showCancelButton?: boolean; submitState: RequestState; onCancel: () => void; onConfirm: () => void };
+export type ConfirmDeleteApplicationModalProps = { title?: string; description?: string; descriptionClassName?: string; className?: string; content?: React.ReactNode; confirmLabel?: string; confirmButtonClassName?: string; showCancelButton?: boolean; submitState: RequestState; onCancel: () => void; onConfirm: () => void };
 export type UnsavedChangesModalProps = { submitState: RequestState; onCancel: () => void; onSave: () => void; onReset: () => void };
 export type BoxerModalProps = { boxerForm: BoxerFormState; submitState: RequestState; title: string; submitLabel: string; onClose: () => void; onFieldChange: (field: keyof BoxerFormState, value: string) => void; onSubmit: (event: React.FormEvent<HTMLFormElement>) => void };
 export type RoomBoxerModalProps = { boxerForm: RoomBoxerFormState; submitState: RequestState; title: string; submitLabel: string; onClose: () => void; onFieldChange: (field: keyof RoomBoxerPayload, value: string) => void; onSubmit: (event: React.FormEvent<HTMLFormElement>) => void };
