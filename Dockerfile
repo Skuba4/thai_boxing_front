@@ -3,7 +3,7 @@ FROM node:24-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+RUN NODE_OPTIONS="--dns-result-order=ipv4first --no-network-family-autoselection" npm ci
 
 COPY . .
 
