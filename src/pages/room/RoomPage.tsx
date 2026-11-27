@@ -621,7 +621,6 @@ export function RoomPanel({
     draftGridBoxers,
     draftGridBoxersRef,
     justBuiltGridIdRef,
-    suppressDraftGridIdsRef,
     draftRingGridOrders,
     editingGridId,
     gridForm,

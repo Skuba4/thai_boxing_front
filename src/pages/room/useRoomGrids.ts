@@ -36,7 +36,6 @@ export function useRoomGrids({
   draftGridBoxers,
   draftGridBoxersRef,
   justBuiltGridIdRef,
-  suppressDraftGridIdsRef,
   draftRingGridOrders,
   editingGridId,
   gridForm,
@@ -84,7 +83,6 @@ export function useRoomGrids({
   draftGridBoxers: Record<string, DraftGridSlot[]>;
   draftGridBoxersRef: MutableRefObject<Record<string, DraftGridSlot[]>>;
   justBuiltGridIdRef: MutableRefObject<string | null>;
-  suppressDraftGridIdsRef: MutableRefObject<Record<string, boolean>>;
   draftRingGridOrders: RingGridOrderDrafts;
   editingGridId: string | null;
   gridForm: CreateGridPayload;
